@@ -15,56 +15,48 @@ NOTES:
 #include<malloc.h>
 #include<stdlib.h>
 
-struct node {
+struct node 
+{
 	int num;
 	struct node *next;
 };
-
-struct node * removeEveryKthNode(struct node *head, int K) 
+struct node* removeEveryKthNode(struct node *head, int K) 
 {
-	int totcount = 0, temp = 0, i = 0, c = 0;
-	struct node* t;
-	struct node* pre;
-	struct node* t1;
-	if (K <= 1)
-		return NULL;
-	else if (head == NULL)
-		return NULL;
-	else
+	int count;
+	struct node* t = head;
+	if (head == NULL || K <= 1) 
 	{
-		t = head;
-		temp = K;
-		t1 = head;
-		if (K > totcount)
-			return head;
-		if (K < totcount)
-		{
-			for (i = 0; i < totcount; i++)
-			{
-				if (temp == i&&temp < totcount)
-				{
-					while (t1 != NULL&&c == K)
-					{
-						pre = t1;
-						t1 = t1->next;
-					}
-					pre->next = t->next;
-					free(t);
-					t = t->next;
-					temp = temp + K;
-				}
-				else if (K < totcount)
-					t = t->next;
-				else
-					break;
-			}
-
-		}
-		return head;
+		return NULL;
 	}
-
 	
-	
-	
-
+else 
+{
+	label:
+	    count = 1;
+    	while (count < K-1 && t != NULL)
+		{
+				count++;
+				t = t->next;
+		}
+		if (t == NULL)
+		return head;
+		else 
+		{
+			if (t->next != NULL)
+			t->next = t->next->next;
+			t = t->next;
+		}
+	}
+	while (t != NULL)
+		goto label;
+	return head;
 }
+
+
+
+
+
+
+
+
+	
